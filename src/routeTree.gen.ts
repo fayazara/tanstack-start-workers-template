@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiItemsRouteImport } from './routes/api/items'
+import { Route as ApiFilesRouteImport } from './routes/api/files'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiItemsRoute = ApiItemsRouteImport.update({
+  id: '/api/items',
+  path: '/api/items',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFilesRoute = ApiFilesRouteImport.update({
+  id: '/api/files',
+  path: '/api/files',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/files': typeof ApiFilesRoute
+  '/api/items': typeof ApiItemsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/files': typeof ApiFilesRoute
+  '/api/items': typeof ApiItemsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/files': typeof ApiFilesRoute
+  '/api/items': typeof ApiItemsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/api/files' | '/api/items'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/api/files' | '/api/items'
+  id: '__root__' | '/' | '/api/files' | '/api/items'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiFilesRoute: typeof ApiFilesRoute
+  ApiItemsRoute: typeof ApiItemsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/items': {
+      id: '/api/items'
+      path: '/api/items'
+      fullPath: '/api/items'
+      preLoaderRoute: typeof ApiItemsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/files': {
+      id: '/api/files'
+      path: '/api/files'
+      fullPath: '/api/files'
+      preLoaderRoute: typeof ApiFilesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiFilesRoute: ApiFilesRoute,
+  ApiItemsRoute: ApiItemsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
