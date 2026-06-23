@@ -6,6 +6,10 @@ Cloudflare Workers with TanStack Start.
 > [!NOTE]
 > This is a highly opinionated starter kit made specifically for agents.
 
+> [!NOTE]
+> This is a highly opinionated starter kit made specifically for agents and is still in beta; use carefully.
+> This is still in betaaaaa, use carefully! blah blah blah 
+
 **Includes:**
 
 - TanStack Start (RC) on Vite, deployed as a Cloudflare Worker
