@@ -3,6 +3,9 @@
 A minimal, AI-agent-friendly starter for building full-stack apps on
 Cloudflare Workers with TanStack Start.
 
+> [!NOTE]
+> This is a highly opinionated starter kit made specifically for agents.
+
 **Includes:**
 
 - TanStack Start (RC) on Vite, deployed as a Cloudflare Worker
